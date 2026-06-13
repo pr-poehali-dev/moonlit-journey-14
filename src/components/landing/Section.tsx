@@ -2,9 +2,22 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import type { SectionProps } from "@/types"
 
-export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText }: SectionProps) {
+export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText, bgImage }: SectionProps) {
   return (
     <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
+      {bgImage && (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+      )}
+      <div className="relative z-10 flex flex-col">
       {subtitle && (
         <motion.div
           className="mb-12"
@@ -49,6 +62,7 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
           </Button>
         </motion.div>
       )}
+      </div>
     </section>
   )
 }
